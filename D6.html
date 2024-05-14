@@ -180,60 +180,58 @@
          La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
       */
 
-      // const generateTable = function () {
-      //   const divTable = document.getElementById("tableArea");
-
-      //   const table = document.createElement("table");
-
-      //   const triga1 = document.createElement("tr");
-      //   const triga2 = document.createElement("tr");
-      //   const triga3 = document.createElement("tr");
-      //   const triga4 = document.createElement("tr");
-      //   const triga5 = document.createElement("tr");
-
-      //   const theadImg = document.createElement("th");
-      //   const theadNome = document.createElement("th");
-      //   const theadQuant = document.createElement("th");
-      //   const theadPrez = document.createElement("th");
-
-      //   const tdata = document.createElement("td");
-
-      //   const immagine = (theadImg.innerText = "immagine");
-      //   const nomeProdotto = (theadNome.innerText = "nome prodotto");
-      //   const quantità = (theadQuant.innerText = "quantità");
-      //   const prezzo = (theadPrez.innerText = "prezzo");
-
-      //   const tabella = divTable.appendChild(table);
-      //   const riga1 = tabella.appendChild(triga1);
-      //   riga1.appendChild(theadImg);
-      //   riga1.appendChild(theadNome);
-      //   riga1.appendChild(theadQuant);
-      //   riga1.appendChild(theadPrez);
-
-      //   tabella.appendChild(triga2);
-      // };
-      const nomiColonne = ["immagine", "nome prodotto", "quantitè", "prezzo"];
-
-      const generateColonne = function () {
-        const triga = document.createElement("tr");
-        nomiColonne.forEach((nome) => {
-          const thead = document.createElement("th");
-          thead.innerText = nome;
-          triga.appendChild(thead);
-          return triga;
-        });
-      };
-
-      const generateRighe = function () {};
-
       const generateTable = function () {
-        const divTable = document.getElementById("tableArea");
+        const container = document.getElementById("tableArea");
         const table = document.createElement("table");
-        divTable.appendChild(table);
-        table.appendChild(generateColonne());
-        // table.appendChild(generateRighe());
+        table.style.width = "100%";
+
+        const firstRow = document.createElement("tr");
+
+        const thImage = document.createElement("th");
+        thImage.innerText = "Immagine";
+        const thProduct = document.createElement("th");
+        thProduct.innerText = "Prodotto";
+        const thQuantity = document.createElement("th");
+        thQuantity.innerText = "Quantità";
+        const thPrice = document.createElement("th");
+        thPrice.innerText = "Prezzo";
+
+        const images = [
+          "https://m.media-amazon.com/images/I/81yJf4K+L1L._AC_SY450_.jpg",
+          "https://m.media-amazon.com/images/I/61MRTh9xotL._AC_SX679_.jpg",
+          "https://www.tradeinn.com/f/13805/138054505/samsung-smartphone-galaxy-s21-5g-8gb-128gb-6.2.jpg",
+          "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1661333885.70133010!500x500.png",
+          "https://tomatosmartphone.it/wp-content/uploads/2022/06/EU-IN_Green.png",
+        ];
+
+        firstRow.appendChild(thImage);
+        firstRow.appendChild(thProduct);
+        firstRow.appendChild(thQuantity);
+        firstRow.appendChild(thPrice);
+        table.appendChild(firstRow);
+
+        for (let i = 0; i < images.length; i++) {
+          const newRow = document.createElement("tr");
+
+          const tdImage = document.createElement("td");
+          tdImage.innerHTML = `<img src=${images[i]} alt="smartphone" height="200" />`;
+          const tdProduct = document.createElement("td");
+          tdProduct.innerText = "Smartphone";
+          const tdQuantity = document.createElement("td");
+          tdQuantity.innerText = Math.floor(Math.random() * 50);
+          const tdPrice = document.createElement("td");
+          tdPrice.innerText = Math.floor(Math.random() * 500) + "€";
+
+          newRow.appendChild(tdImage);
+          newRow.appendChild(tdProduct);
+          newRow.appendChild(tdQuantity);
+          newRow.appendChild(tdPrice);
+          table.appendChild(newRow);
+        }
+
+        container.appendChild(table);
       };
-      generateColonne();
+
       generateTable();
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
