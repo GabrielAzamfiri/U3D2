@@ -113,8 +113,8 @@
         */
 
       const changeUrls = function () {
-        const newHHHref = (document.querySelector("a").href = "https://www.google.com"); //per selezionare tutti gli a tranne quelli del footer devo fare: querySelectorAll("a:not(footer a)"); prendi a ma non quelli del footer
-
+        const newHHHref = document.querySelectorAll("a:not(footer a)"); //per selezionare tutti gli a tranne quelli del footer devo fare: querySelectorAll("a:not(footer a)"); prendi a ma non quelli del footer
+        newHHHref.forEach((link) => (link.href = "https://www.google.com"));
         return newHHHref;
       };
       changeUrls();
@@ -152,7 +152,7 @@
         */
 
       const paintItGreen = function () {
-        const listaNonOrdinata = document.querySelectorAll("ul"); // con getElementsById non funziona
+        const listaNonOrdinata = document.querySelectorAll("ul"); // con getElementsByTag non funziona
         console.log(listaNonOrdinata);
         listaNonOrdinata.forEach((element) => (element.style.backgroundColor = "green"));
       };
@@ -212,16 +212,29 @@
 
       //   tabella.appendChild(triga2);
       // };
-      // generateTable();
+      const nomiColonne = ["immagine", "nome prodotto", "quantitè", "prezzo"];
+
+      const generateColonne = function () {
+        const triga = document.createElement("tr");
+        nomiColonne.forEach((nome) => {
+          const thead = document.createElement("th");
+          thead.innerText = nome;
+          triga.appendChild(thead);
+          return triga;
+        });
+      };
+
+      const generateRighe = function () {};
+
       const generateTable = function () {
         const divTable = document.getElementById("tableArea");
         const table = document.createElement("table");
-        divTable.appendChild(generateColonne());
-        divTable.appendChild(generateRighe());
+        divTable.appendChild(table);
+        table.appendChild(generateColonne());
+        // table.appendChild(generateRighe());
       };
-      const generateColonne = function () {};
-      const generateRighe = function () {};
-
+      generateColonne();
+      generateTable();
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
